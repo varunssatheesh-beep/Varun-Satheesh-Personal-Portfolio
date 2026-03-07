@@ -1,8 +1,8 @@
 /* --- BASE VARIABLES & THEME --- */
 :root {
     --bg-deep: #0B0B0B;
-    --primary-blue: #2563EB;
-    --primary-blue-glow: rgba(37, 99, 235, 0.4);
+    --primary-red: #900C3F;
+    --primary-red-glow: rgba(144, 12, 63, 0.4);
     --accent-gold: #D4AF37;
     --accent-gold-glow: rgba(212, 175, 55, 0.3);
     
@@ -68,7 +68,7 @@ body {
     right: -5%;
     width: 50vw;
     height: 50vw;
-    background: radial-gradient(circle, var(--primary-blue-glow) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--primary-red-glow) 0%, transparent 70%);
 }
 
 .glow-2 {
@@ -113,8 +113,8 @@ body {
 }
 
 .accent-text {
-    color: var(--primary-blue);
-    text-shadow: 0 0 15px var(--primary-blue-glow);
+    color: var(--primary-red);
+    text-shadow: 0 0 15px var(--primary-red-glow);
 }
 
 .nav-links {
@@ -144,9 +144,9 @@ body {
 }
 
 .nav-links a.active {
-    color: var(--primary-blue);
-    background: rgba(37, 99, 235, 0.1);
-    box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.3);
+    color: var(--primary-red);
+    background: rgba(144, 12, 63, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(144, 12, 63, 0.3);
 }
 
 .main-content {
@@ -214,15 +214,16 @@ body {
 .accent-dot {
     width: 12px;
     height: 12px;
-    background: var(--primary-blue);
+    background: var(--primary-red);
     border-radius: 50%;
-    box-shadow: 0 0 15px var(--primary-blue);
+    box-shadow: 0 0 15px var(--primary-red);
 }
 
 /* --- TYPOGRAPHY & BUTTONS --- */
 .gradient-text {
-    background: linear-gradient(135deg, var(--text-main), var(--primary-blue));
+    background: linear-gradient(135deg, var(--text-main), var(--primary-red));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -241,15 +242,15 @@ body {
 }
 
 .btn-primary {
-    background: var(--primary-blue);
+    background: var(--primary-red);
     color: white;
     border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 20px var(--primary-blue-glow);
+    box-shadow: 0 0 20px var(--primary-red-glow);
 }
 
 .btn-primary:hover {
-    background: #1d4ed8;
-    box-shadow: 0 0 30px var(--primary-blue-glow);
+    background: #5e0829;
+    box-shadow: 0 0 30px var(--primary-red-glow);
     transform: translateY(-2px);
 }
 
@@ -329,24 +330,28 @@ body {
     flex-direction: column;
     color: var(--accent-gold);
     text-shadow: 0 0 10px rgba(212,175,55,0.5);
-    animation: rotateText 10s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    animation: rotateText 16s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 .tagline-text {
     height: 40px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 @keyframes rotateText {
-    0%, 20%  { transform: translateY(0); }
-    25%, 45% { transform: translateY(-40px); }
-    50%, 70% { transform: translateY(-80px); }
-    75%, 95% { transform: translateY(-120px); }
-    100%     { transform: translateY(-160px); } /* Assuming 4 items, we duplicate first to make smooth or use js */
+    0%, 11% { transform: translateY(0); }
+    14%, 25% { transform: translateY(-40px); }
+    28%, 39% { transform: translateY(-80px); }
+    42%, 53% { transform: translateY(-120px); }
+    57%, 68% { transform: translateY(-160px); }
+    71%, 82% { transform: translateY(-200px); }
+    85%, 96% { transform: translateY(-240px); }
+    100% { transform: translateY(-280px); }
 }
 
-/* Fix for smooth loop, CSS only rotation using 5 items total (last=first) is better, but JS handles simpler. We'll refine JS rotation. */
+/* Fix for smooth loop, JS duplicates the first item automatically */
 
 .cta-group {
     display: flex;
@@ -371,22 +376,21 @@ body {
     overflow: hidden;
 }
 
-.portrait-inner {
+.portrait-image {
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    border-radius: 28px;
+    object-fit: cover;
     z-index: 2;
-    color: var(--text-muted);
-    opacity: 0.5;
-}
-
-.portrait-icon {
-    width: 64px;
-    height: 64px;
+    position: relative;
+    background: var(--bg-deep);
 }
 
 .portrait-glow {
     position: absolute;
     width: 150%;
     height: 150%;
-    background: conic-gradient(from 0deg at 50% 50%, var(--bg-deep) 0deg, var(--primary-blue-glow) 180deg, var(--bg-deep) 360deg);
+    background: conic-gradient(from 0deg at 50% 50%, var(--bg-deep) 0deg, var(--primary-red-glow) 180deg, var(--bg-deep) 360deg);
     animation: spin 8s linear infinite;
     z-index: 1;
     opacity: 0.3;
@@ -425,12 +429,12 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 1.5rem;
-    color: var(--primary-blue);
+    color: var(--primary-red);
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 .card-icon.gold { color: var(--accent-gold); }
-.card-icon.blue { color: var(--primary-blue); }
+.card-icon.blue { color: var(--primary-red); }
 
 .about-card h3 {
     font-family: var(--font-heading);
@@ -466,7 +470,7 @@ body {
     border-radius: 50%;
 }
 
-.achievement-glow.blue { background: var(--primary-blue-glow); }
+.achievement-glow.blue { background: var(--primary-red-glow); }
 
 .achievement-header {
     display: flex;
@@ -489,7 +493,7 @@ body {
 }
 
 .achievement-icon.blue {
-    color: var(--primary-blue);
+    color: var(--primary-red);
     box-shadow: 0 0 20px rgba(37,99,235,0.2);
 }
 
@@ -524,7 +528,7 @@ body {
     position: absolute;
     top: 0; bottom: 0; left: 0;
     width: 2px;
-    background: linear-gradient(to bottom, var(--primary-blue), transparent);
+    background: linear-gradient(to bottom, var(--primary-red), transparent);
 }
 
 .timeline-item {
@@ -538,8 +542,8 @@ body {
     width: 16px; height: 16px;
     border-radius: 50%;
     background: var(--bg-deep);
-    border: 3px solid var(--primary-blue);
-    box-shadow: 0 0 15px var(--primary-blue);
+    border: 3px solid var(--primary-red);
+    box-shadow: 0 0 15px var(--primary-red);
 }
 
 .timeline-content {
@@ -576,7 +580,7 @@ body {
 }
 
 .timeline-responsibilities li i {
-    color: var(--primary-blue);
+    color: var(--primary-red);
     width: 18px; height: 18px;
 }
 
@@ -655,10 +659,10 @@ body {
 }
 
 .skill-tag:hover {
-    background: rgba(37, 99, 235, 0.1);
-    border-color: rgba(37, 99, 235, 0.4);
-    color: var(--primary-blue);
-    box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+    background: rgba(144, 12, 63, 0.1);
+    border-color: rgba(144, 12, 63, 0.4);
+    color: var(--primary-red);
+    box-shadow: 0 0 15px rgba(144, 12, 63, 0.2);
     transform: translateY(-2px);
 }
 
@@ -687,7 +691,7 @@ body {
 
 .cert-icon {
     width: 40px; height: 40px;
-    color: var(--primary-blue);
+    color: var(--primary-red);
     transition: var(--transition);
 }
 
@@ -734,9 +738,9 @@ body {
 .icon-wrapper {
     width: 60px; height: 60px;
     border-radius: 50%;
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(144, 12, 63, 0.1);
     display: flex; align-items: center; justify-content: center;
-    color: var(--primary-blue);
+    color: var(--primary-red);
     margin-bottom: 0.5rem;
 }
 
@@ -789,15 +793,15 @@ body {
     border-radius: 50%;
     background: rgba(255,255,255,0.05);
     display: flex; align-items: center; justify-content: center;
-    color: var(--primary-blue);
+    color: var(--primary-red);
     border: 1px solid rgba(255,255,255,0.1);
     transition: var(--transition);
 }
 
 .contact-method:hover .icon-circle {
-    background: var(--primary-blue);
+    background: var(--primary-red);
     color: white;
-    box-shadow: 0 0 20px var(--primary-blue-glow);
+    box-shadow: 0 0 20px var(--primary-red-glow);
 }
 
 .method-details {
@@ -822,20 +826,20 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem 3rem;
-    background: linear-gradient(135deg, var(--primary-blue), #1e3a8a);
+    background: linear-gradient(135deg, var(--primary-red), #1e3a8a);
     border-radius: 100px;
     text-decoration: none;
     color: white;
     font-family: var(--font-heading);
     font-size: 1.2rem;
     font-weight: 600;
-    box-shadow: 0 10px 30px var(--primary-blue-glow);
+    box-shadow: 0 10px 30px var(--primary-red-glow);
     transition: var(--transition);
 }
 
 .btn-send:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 15px 40px rgba(144, 12, 63, 0.6);
 }
 
 .btn-send i {
@@ -881,10 +885,10 @@ body {
 }
 
 .social-icon:hover {
-    background: var(--primary-blue);
+    background: var(--primary-red);
     color: white;
-    border-color: var(--primary-blue);
-    box-shadow: 0 0 20px var(--primary-blue-glow);
+    border-color: var(--primary-red);
+    box-shadow: 0 0 20px var(--primary-red-glow);
     transform: translateY(-5px);
 }
 
