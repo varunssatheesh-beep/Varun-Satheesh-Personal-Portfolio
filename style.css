@@ -194,6 +194,8 @@ body {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     transition: var(--transition);
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
 }
 
 .glass-panel:hover {
@@ -210,6 +212,8 @@ body {
     backdrop-filter: blur(16px);
     overflow: hidden;
     transition: var(--transition);
+    will-change: transform, box-shadow;
+    transform: translateZ(0);
 }
 
 .premium-glass::before {
@@ -412,6 +416,8 @@ body {
     object-position: bottom right;
     filter: drop-shadow(-10px 10px 30px rgba(0,0,0,0.8));
     animation: float 6s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 @keyframes float {
@@ -924,36 +930,97 @@ body {
 .delay-3 { transition-delay: 0.3s; }
 
 @media (max-width: 1024px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        z-index: 1000;
-    }
-    .logo { margin-bottom: 0; }
-    .nav-links {
-        display: none; /* In a real app we'd add a hamburger menu */
-    }
-    .main-content {
-        margin-left: 0;
-        padding-top: 80px;
-    }
     .split-section {
         grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .main-content {
+        padding-bottom: 100px;
     }
 }
 
 @media (max-width: 768px) {
+    .section { padding: 4rem 1.5rem; min-height: auto; }
+
     #hero {
         flex-direction: column;
+        padding: 6rem 1.5rem 2rem;
+        margin: 0;
+        min-height: 100vh;
         justify-content: center;
-        text-align: left;
-        padding: 2rem;
+        text-align: center;
     }
-    .hero-title { font-size: 3.5rem; }
-    .section { padding: 4rem 2rem; }
+    
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        margin-top: 0;
+    }
+
+    .hero-title { font-size: 3rem; margin-bottom: 0.5rem; }
+    .hero-subtitle { font-size: 1.25rem; margin-bottom: 1.5rem; }
+    .rotating-tagline { font-size: 1.15rem; justify-content: center; margin-bottom: 2rem; }
+    .cta-group { justify-content: center; gap: 0.75rem; margin-bottom: 2rem; }
+
+    .hero-portrait {
+        position: relative;
+        width: 100%;
+        height: 50vh;
+        max-height: 400px;
+        right: auto;
+        bottom: auto;
+        justify-content: center;
+        z-index: 1;
+    }
+
+    /* Adjust Navigation Dock for Mobile */
+    .bottom-nav {
+        width: 95%;
+        padding: 0.75rem 1rem;
+        bottom: -80px;
+        border-radius: 16px 16px 0 0;
+    }
+    
+    .logo { display: none; } /* Hide logo to make room for icons */
+    
+    .nav-links { gap: 0.25rem; padding: 0; }
+    
+    .nav-links a { padding: 0.5rem; border-radius: 8px; }
+
+    /* Grids & Flex Adjustments */
+    .about-grid, .exposure-grid, .leadership-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-wrapper {
+        flex-direction: column;
+        padding: 2.5rem 1.5rem;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .contact-methods {
+        align-items: center;
+        width: 100%;
+    }
+
+    .contact-method {
+        width: 100%;
+        justify-content: center;
+        max-width: 320px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .footer {
+        padding: 3rem 1.5rem;
+    }
 }
 

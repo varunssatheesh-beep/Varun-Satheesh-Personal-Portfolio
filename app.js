@@ -1,11 +1,14 @@
 // Initialize Lucide Icons
 lucide.createIcons();
 
+// Check if user is on mobile to dramatically reduce canvas overhead
+const isMobile = window.innerWidth < 768;
+
 // Particle.js Configuration for Neural Network effect
 particlesJS('particles-js', {
   "particles": {
     "number": {
-      "value": 60,
+      "value": isMobile ? 25 : 60,
       "density": {
         "enable": true,
         "value_area": 800
@@ -105,27 +108,30 @@ revealElements.forEach(el => {
     revealObserver.observe(el);
 });
 
-// Navigation Highlight on Scroll
+// Navigation Highlight on Scroll (Performance Optimized)
 const sections = document.querySelectorAll('section');
 const navLinks = document.querySelectorAll('.nav-links a');
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollY = window.pageYOffset;
+const navObserverOptions = {
+    root: null,
+    rootMargin: '-50% 0px -50% 0px', // Trigger when section passes the middle of viewport
+    threshold: 0
+};
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const currentId = entry.target.getAttribute('id');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentId) {
+                    link.classList.add('active');
+                }
+            });
         }
     });
+}, navObserverOptions);
 
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === current) {
-            link.classList.add('active');
-        }
-    });
+sections.forEach(section => {
+    navObserver.observe(section);
 });
